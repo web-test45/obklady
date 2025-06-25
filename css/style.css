@@ -8,6 +8,12 @@ body {
   margin-top: 60px;
   margin-bottom: 60px;
 }
+  @media (max-width: 576px) {
+    .testimonial-box {
+      margin-bottom: 1.5rem;
+      margin-top:1.5rem;
+    }
+  }
 
 .benefits_section{
   background-color: #eeeeee;
@@ -130,6 +136,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 12px;
 }
 
 .hero_bg_box .img-box {
@@ -476,6 +483,11 @@ a:focus {
           box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.05);
   position: relative;
   margin-left: -45px;
+}
+#rating .detail-box {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  background-color: #00000069;
 }
 
 .about_section .detail-box p {
