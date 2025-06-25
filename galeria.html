@@ -13,7 +13,7 @@
   <meta name="author" content="Terasy & Obklady" />
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-  <title>Galéria realizácií | Terasy & Obklady</title>
+  <title>Foto Galéria | Terasy & Obklady</title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -27,36 +27,43 @@
   <link href="css/responsive.css" rel="stylesheet" />
 
   <style>
+
     .gallery-section {
       padding: 80px 0;
     }
     
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 20px;
       margin-top: 40px;
     }
-    
+
     .gallery-item {
+      position: relative;
+      aspect-ratio: 1 / 1;
       border: 1px solid #000;
       overflow: hidden;
-      border-radius: 5px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-sizing: border-box;
       cursor: pointer;
+      border-radius: 5px;
     }
-    
+
+    .gallery-item img {
+      width: calc(100% - 2px);
+      height: calc(100% - 2px);
+      object-fit: cover;
+      display: block;
+      border-radius: 5px;
+      
+    }
+
+
     .gallery-item:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     }
     
-    .gallery-item img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      display: block;
-    }
     
     .loading-message {
       text-align: center;
@@ -163,24 +170,21 @@
             </button>
 
             <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
-              <ul class="navbar-nav  ">
-                <li class="nav-item ">
-                  <a class="nav-link" href="index.html">Domov <span class="sr-only">(current)</span></a>
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link active" href="index.html">Domov <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="about.html"> O nás</a>
+                  <a class="nav-link" href="index.html#about">O nás</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="service.html"> Služby </a>
+                  <a class="nav-link" href="index.html#services">Výber</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="guard.html"> Realizácie </a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="gallery.html"> Galéria </a>
+                  <a class="nav-link" href="index.html#rating">Recenzie</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="contact.html">Kontakt</a>
+                  <a class="nav-link" href="index.html#contact">Kontakt</a>
                 </li>
               </ul>
             </div>
@@ -196,11 +200,8 @@
     <div class="container">
       <div class="heading_container heading_center">
         <h2>
-          Galéria našich realizácií
+          Foto Galéria
         </h2>
-        <p>
-          Pozrite si kompletný prehľad našich projektov. Každý obrázok predstavuje kvalitne zrealizovaný projekt s dôrazom na detail a spokojnosť klienta.
-        </p>
       </div>
       
       <div id="loadingMessage" class="loading-message">
@@ -235,9 +236,6 @@
           <p>Neváhajte nás kontaktovať. Radi vám vypracujeme nezáväznú cenovú ponuku na mieru.</p>
           <a href="tel:0948894899" class="btn-custom btn-lg">
             <i class="fa fa-phone mr-2"></i> Zavolať teraz
-          </a>
-          <a href="contact.html" class="btn-custom-outline btn-lg ml-3">
-            <i class="fa fa-envelope mr-2"></i> Napísať správu
           </a>
         </div>
       </div>
@@ -322,33 +320,6 @@
             </a>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="info_form ">
-            <h5>
-              Novinky a akcie
-            </h5>
-            <form action="#">
-              <input type="email" placeholder="Zadajte váš email">
-              <button>
-                Odoberať
-              </button>
-            </form>
-            <div class="social_box">
-              <a href="">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-youtube" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-instagram" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -401,7 +372,7 @@
         
         for (const name of commonImageNames) {
           for (const ext of imageExtensions) {
-            const imagePath = `images/${name}.${ext}`;
+            const imagePath = `gallery/${name}.${ext}`;
             promises.push(
               checkImageExists(imagePath).then(exists => {
                 totalChecked++;
@@ -434,7 +405,7 @@
       loadingMessage.style.display = 'none';
 
       if (loadedImages.length === 0) {
-        errorMessage.innerHTML = 'V priečinku images sa nenašli žiadne obrázky.';
+        errorMessage.innerHTML = 'V priečinku gallery sa nenašli žiadne obrázky.';
         errorMessage.style.display = 'block';
         return;
       }
